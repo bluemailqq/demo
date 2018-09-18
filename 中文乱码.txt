@@ -1,9 +1,0 @@
-1、jsp文件的charset和pageEncoding
-可都设为"GBK"
-需要输入中文的jsp，设为UTF-8
-
-2、mysql
-建表时添加： ENGINE=InnoDB DEFAULT CHARSET=gbk
-
-3、beans.xml
-在url数据库后添加：?useUnicode=true&amp;characterEncoding=gbk
