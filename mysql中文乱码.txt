@@ -1,0 +1,28 @@
+mysql
+中文乱码是因为编码不一致引起的。
+
+执行：show variables like 'character%';
+
+mysql> show variables like 'char%';
++--------------------------+------------------------------------------------+
+| Variable_name            | Value                                          |
++--------------------------+------------------------------------------------+
+| character_set_client     | gbk                                            |
+| character_set_connection | gbk                                            |
+| character_set_database   | latin1                                         |
+| character_set_filesystem | binary                                         |
+| character_set_results    | gbk                                            |
+| character_set_server     | latin1                                         |
+| character_set_system     | utf8                                           |
+| character_sets_dir       | D:\software\mysql-5.5.28-win32\share\charsets\ |
++--------------------------+------------------------------------------------+
+8 rows in set (0.00 sec)
+character_set_client、character_set_connection、character_set_results对应客户端、连接、结果集的编码。
+可用set names utf8;改变上述3个编码为utf8。
+character_set_server和character_set_database控制存储时使用的编码，前者对应整个server,后者对应单个库。使用set命令可临时改变编码，重启后失效。如想永久改变，需修改my.ini。
+set character_set_server=utf8;
+
+如不改变默认的编码，也可在建表时指定编码。
+建表时添加： ENGINE=InnoDB DEFAULT CHARSET=gbk
+
+最后，要注意客户端编码，这里的客户端指的是如cmd（使用MySQL客户端时），在JSP中读取并显示MySQL数据时，cmd和JSP等使用的编码。CMD中可用chcp改变编码。
